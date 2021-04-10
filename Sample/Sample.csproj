@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Panosen.AspNetCore.Authentication.Basic\Panosen.AspNetCore.Authentication.Basic.csproj" />
+    <ProjectReference Include="..\Panosen.AspNetCore.Authentication.Header\Panosen.AspNetCore.Authentication.Header.csproj" />
+  </ItemGroup>
+
+
+</Project>

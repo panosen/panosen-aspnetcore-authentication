@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Panosen.AspNetCore.Authentication.Basic</PackageId>
+    <Authors>HarrisZhang</Authors>
+    <Version>1.0.0</Version>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Panosen.AspNetCore.Authentication.Basic</AssemblyName>
+    <RootNamespace>Panosen.AspNetCore.Authentication.Basic</RootNamespace>
+    <RepositoryUrl>https://github.com/panosen/aspnetcore-authentication</RepositoryUrl>
+    <PackageIcon>panosen.png</PackageIcon>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Panosen AspNetCore BasicAuthentication.</Description>
+    <PackageTags>Authentication</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DocumentationFile>bin\$(Configuration)\Panosen.AspNetCore.Authentication.Basic.xml</DocumentationFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\panosen.png" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+</Project>
