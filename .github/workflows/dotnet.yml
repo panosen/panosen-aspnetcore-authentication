@@ -23,6 +23,7 @@ jobs:
       run: dotnet build --no-restore -c Release
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    - name: Publish Nuget
+    - name: Publish Nuget Panosen.AspNetCore.Authentication.Basic
       run: dotnet nuget push Panosen.AspNetCore.Authentication.Basic/bin/Release/Panosen.AspNetCore.Authentication.Basic.*.nupkg -s https://api.nuget.org/v3/index.json -k ${{secrets.PANOSEN_NUGET_API_KEY}} --skip-duplicate
+    - name: Publish Nuget Panosen.AspNetCore.Authentication.Header
       run: dotnet nuget push Panosen.AspNetCore.Authentication.Header/bin/Release/Panosen.AspNetCore.Authentication.Header.*.nupkg -s https://api.nuget.org/v3/index.json -k ${{secrets.PANOSEN_NUGET_API_KEY}} --skip-duplicate
