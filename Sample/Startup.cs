@@ -1,4 +1,4 @@
-using System;
+锘縰sing System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -29,11 +29,11 @@ namespace Sample
             services.AddSingleton<IBasicAuthenticationService, SampleIBasicAuthenticationService>();
             services.AddSingleton<IHeaderAuthenticationService, SampleHeaderAuthenticationService>();
 
-            ////添加基础身份认证
-            services.AddAuthentication(BasicAuthenticationDefaults.AuthenticationScheme).AddBasic();
+            ////娣诲姞鍩虹韬唤璁よ瘉
+            services.AddAuthentication(BasicAuthenticationDefaults.AuthenticationScheme).AddPanosenBasicAuthentication();
 
-            //添加Header身份认证
-            services.AddAuthentication(HeaderAuthenticationDefaults.AuthenticationScheme).AddHeader(options =>
+            //娣诲姞Header韬唤璁よ瘉
+            services.AddAuthentication(HeaderAuthenticationDefaults.AuthenticationScheme).AddPanosenHeaderAuthentication(options =>
             {
                 options.HeaderKey = "NUGET-API-KEY";
             });
@@ -51,7 +51,7 @@ namespace Sample
 
             app.UseRouting();
 
-            //使用基础身份认证
+            //浣跨敤鍩虹韬唤璁よ瘉
             app.UseAuthentication();
 
             app.UseAuthorization();

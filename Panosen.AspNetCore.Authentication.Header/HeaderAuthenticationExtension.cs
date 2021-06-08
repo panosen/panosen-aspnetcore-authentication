@@ -17,31 +17,31 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <summary>
         /// 添加基础身份认证
         /// </summary>
-        public static AuthenticationBuilder AddHeader(this AuthenticationBuilder builder)
-            => builder.AddHeader(HeaderAuthenticationDefaults.AuthenticationScheme);
+        public static AuthenticationBuilder AddPanosenHeaderAuthentication(this AuthenticationBuilder builder)
+            => builder.AddPanosenHeaderAuthentication(HeaderAuthenticationDefaults.AuthenticationScheme);
 
         /// <summary>
         /// 添加基础身份认证
         /// </summary>
-        public static AuthenticationBuilder AddHeader(this AuthenticationBuilder builder, string authenticationScheme)
-            => builder.AddHeader(authenticationScheme, configureOptions: null);
+        public static AuthenticationBuilder AddPanosenHeaderAuthentication(this AuthenticationBuilder builder, string authenticationScheme)
+            => builder.AddPanosenHeaderAuthentication(authenticationScheme, configureOptions: null);
 
         /// <summary>
         /// 添加基础身份认证
         /// </summary>
-        public static AuthenticationBuilder AddHeader(this AuthenticationBuilder builder, Action<HeaderAuthenticationOptions> configureOptions)
-            => builder.AddHeader(HeaderAuthenticationDefaults.AuthenticationScheme, configureOptions);
+        public static AuthenticationBuilder AddPanosenHeaderAuthentication(this AuthenticationBuilder builder, Action<HeaderAuthenticationOptions> configureOptions)
+            => builder.AddPanosenHeaderAuthentication(HeaderAuthenticationDefaults.AuthenticationScheme, configureOptions);
 
         /// <summary>
         /// 添加基础身份认证
         /// </summary>
-        public static AuthenticationBuilder AddHeader(this AuthenticationBuilder builder, string authenticationScheme, Action<HeaderAuthenticationOptions> configureOptions)
-            => builder.AddHeader(authenticationScheme, displayName: null, configureOptions: configureOptions);
+        public static AuthenticationBuilder AddPanosenHeaderAuthentication(this AuthenticationBuilder builder, string authenticationScheme, Action<HeaderAuthenticationOptions> configureOptions)
+            => builder.AddPanosenHeaderAuthentication(authenticationScheme, displayName: null, configureOptions: configureOptions);
 
         /// <summary>
         /// 添加基础身份认证
         /// </summary>
-        public static AuthenticationBuilder AddHeader(this AuthenticationBuilder builder, string authenticationScheme, string displayName, Action<HeaderAuthenticationOptions> configureOptions)
+        public static AuthenticationBuilder AddPanosenHeaderAuthentication(this AuthenticationBuilder builder, string authenticationScheme, string displayName, Action<HeaderAuthenticationOptions> configureOptions)
         {
             builder.Services.AddOptions<HeaderAuthenticationOptions>(authenticationScheme)
                 .Validate(options => !string.IsNullOrEmpty(options.HeaderKey), "options.HeaderKey is null or empty");
