@@ -7,12 +7,12 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Panosen.AspNetCore.Authentication.Basic</AssemblyName>
     <RootNamespace>Panosen.AspNetCore.Authentication.Basic</RootNamespace>
-    <RepositoryUrl>https://github.com/panosen/aspnetcore-authentication</RepositoryUrl>
     <PackageIcon>panosen.png</PackageIcon>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Panosen AspNetCore BasicAuthentication.</Description>
     <PackageTags>Authentication</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/panosen/panosen-aspnetcore-authentication</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup>
