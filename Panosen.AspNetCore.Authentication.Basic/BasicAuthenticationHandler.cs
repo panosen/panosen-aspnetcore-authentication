@@ -66,13 +66,15 @@ namespace Panosen.AspNetCore.Authentication.Basic
                 var content = Encoding.UTF8.GetString(Convert.FromBase64String(token));
                 if (string.IsNullOrEmpty(content))
                 {
-                    throw new Exception("token format error.");
+                    Logger.LogInformation("token " + token + "failed: token empty error.");
+                    return AuthenticateResult.Fail("token empty error.");
                 }
 
                 var array = content.Split(':');
                 if (array.Length != 2)
                 {
-                    throw new Exception("token format error.");
+                    Logger.LogInformation("token " + token + "failed: token format error.");
+                    return AuthenticateResult.Fail("token format error.");
                 }
 
                 var valid = await basicAuthenticationService.ValidateAsync(array[0], array[1]);
@@ -93,8 +95,6 @@ namespace Panosen.AspNetCore.Authentication.Basic
                 Logger.LogWarning("token " + token + "failed: " + ex.Message);
                 return AuthenticateResult.Fail(ex.Message);
             }
-
-            throw new NotImplementedException();
         }
     }
 }
