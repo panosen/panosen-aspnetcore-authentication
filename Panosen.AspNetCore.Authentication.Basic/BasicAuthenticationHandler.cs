@@ -84,7 +84,7 @@ namespace Panosen.AspNetCore.Authentication.Basic
                     return AuthenticateResult.Fail("token valida failed.");
                 }
 
-                var claims = new List<Claim> { new Claim(ClaimTypes.Name, array[1]) };
+                var claims = new List<Claim> { new Claim(ClaimTypes.Name, array[0]) };
 
                 var principal = new ClaimsPrincipal(new ClaimsIdentity(claims, BasicAuthenticationDefaults.AuthenticationScheme));
 
