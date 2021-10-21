@@ -36,7 +36,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// 添加基础身份认证
         /// </summary>
         public static AuthenticationBuilder AddPanosenHeaderAuthentication(this AuthenticationBuilder builder, string authenticationScheme, Action<HeaderAuthenticationOptions> configureOptions)
-            => builder.AddPanosenHeaderAuthentication(authenticationScheme, displayName: null, configureOptions: configureOptions);
+            => builder.AddPanosenHeaderAuthentication(authenticationScheme, displayName: HeaderAuthenticationDefaults.DisplayName, configureOptions: configureOptions);
 
         /// <summary>
         /// 添加基础身份认证
