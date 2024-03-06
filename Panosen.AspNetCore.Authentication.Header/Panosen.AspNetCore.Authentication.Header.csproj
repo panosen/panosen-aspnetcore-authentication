@@ -3,7 +3,7 @@
   <PropertyGroup>
     <PackageId>Panosen.AspNetCore.Authentication.Header</PackageId>
     <Authors>HarrisZhang</Authors>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Panosen.AspNetCore.Authentication.Header</AssemblyName>
     <RootNamespace>Panosen.AspNetCore.Authentication.Header</RootNamespace>
