@@ -26,17 +26,16 @@ namespace Sample
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IBasicAuthenticationService, SampleIBasicAuthenticationService>();
-            services.AddSingleton<IHeaderAuthenticationService, SampleHeaderAuthenticationService>();
-
             ////添加基础身份认证
-            services.AddAuthentication(BasicAuthenticationDefaults.AuthenticationScheme).AddPanosenBasicAuthentication();
+            services.AddAuthentication(BasicAuthenticationDefaults.AuthenticationScheme)
+                .AddPanosenBasicAuthentication()
+                .AddBasicAuthenticationService<SampleIBasicAuthenticationService>(ServiceLifetime.Singleton);
 
             //添加Header身份认证
             services.AddAuthentication(HeaderAuthenticationDefaults.AuthenticationScheme).AddPanosenHeaderAuthentication(options =>
             {
                 options.HeaderKey = "NUGET-API-KEY";
-            });
+            }).AddHeaderAuthenticationService<SampleHeaderAuthenticationService>(ServiceLifetime.Singleton);
 
             services.AddControllers();
         }

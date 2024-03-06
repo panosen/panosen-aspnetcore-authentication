@@ -17,35 +17,37 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <summary>
         /// 添加基础身份认证
         /// </summary>
-        public static AuthenticationBuilder AddPanosenBasicAuthentication(this AuthenticationBuilder builder)
+        public static BasicAuthenticationBuilder AddPanosenBasicAuthentication(this AuthenticationBuilder builder)
             => builder.AddPanosenBasicAuthentication(BasicAuthenticationDefaults.AuthenticationScheme);
 
         /// <summary>
         /// 添加基础身份认证
         /// </summary>
-        public static AuthenticationBuilder AddPanosenBasicAuthentication(this AuthenticationBuilder builder, string authenticationScheme)
+        public static BasicAuthenticationBuilder AddPanosenBasicAuthentication(this AuthenticationBuilder builder, string authenticationScheme)
             => builder.AddPanosenBasicAuthentication(authenticationScheme, configureOptions: null);
 
         /// <summary>
         /// 添加基础身份认证
         /// </summary>
-        public static AuthenticationBuilder AddPanosenBasicAuthentication(this AuthenticationBuilder builder, Action<BasicAuthenticationOptions> configureOptions)
+        public static BasicAuthenticationBuilder AddPanosenBasicAuthentication(this AuthenticationBuilder builder, Action<BasicAuthenticationOptions> configureOptions)
             => builder.AddPanosenBasicAuthentication(BasicAuthenticationDefaults.AuthenticationScheme, configureOptions);
 
         /// <summary>
         /// 添加基础身份认证
         /// </summary>
-        public static AuthenticationBuilder AddPanosenBasicAuthentication(this AuthenticationBuilder builder, string authenticationScheme, Action<BasicAuthenticationOptions> configureOptions)
+        public static BasicAuthenticationBuilder AddPanosenBasicAuthentication(this AuthenticationBuilder builder, string authenticationScheme, Action<BasicAuthenticationOptions> configureOptions)
             => builder.AddPanosenBasicAuthentication(authenticationScheme, displayName: BasicAuthenticationDefaults.DisplayName, configureOptions: configureOptions);
 
         /// <summary>
         /// 添加基础身份认证
         /// </summary>
-        public static AuthenticationBuilder AddPanosenBasicAuthentication(this AuthenticationBuilder builder, string authenticationScheme, string displayName, Action<BasicAuthenticationOptions> configureOptions)
+        public static BasicAuthenticationBuilder AddPanosenBasicAuthentication(this AuthenticationBuilder builder, string authenticationScheme, string displayName, Action<BasicAuthenticationOptions> configureOptions)
         {
             builder.Services.AddOptions<BasicAuthenticationOptions>(authenticationScheme);
 
-            return builder.AddScheme<BasicAuthenticationOptions, BasicAuthenticationHandler>(authenticationScheme, displayName, configureOptions);
+            builder.AddScheme<BasicAuthenticationOptions, BasicAuthenticationHandler>(authenticationScheme, displayName, configureOptions);
+
+            return new BasicAuthenticationBuilder(builder.Services);
         }
     }
 }

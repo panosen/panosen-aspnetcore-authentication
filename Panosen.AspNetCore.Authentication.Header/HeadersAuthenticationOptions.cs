@@ -8,7 +8,7 @@ namespace Panosen.AspNetCore.Authentication.Header
     /// <summary>
     /// HeaderAuthenticationOptions
     /// </summary>
-    public class HeaderAuthenticationOptions: AuthenticationSchemeOptions
+    public class HeaderAuthenticationOptions : AuthenticationSchemeOptions
     {
         /// <summary>
         /// HeaderKey
