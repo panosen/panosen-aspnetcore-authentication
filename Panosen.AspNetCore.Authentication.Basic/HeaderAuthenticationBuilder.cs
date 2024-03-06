@@ -26,7 +26,7 @@ namespace Panosen.AspNetCore.Authentication.Basic
         public BasicAuthenticationBuilder AddBasicAuthenticationService<TBasicAuthenticationService>(ServiceLifetime serviceLifetime)
             where TBasicAuthenticationService : class, IBasicAuthenticationService
         {
-            services.Add(ServiceDescriptor.Describe(typeof(TBasicAuthenticationService), typeof(TBasicAuthenticationService), serviceLifetime));
+            services.Add(ServiceDescriptor.Describe(typeof(IBasicAuthenticationService), typeof(TBasicAuthenticationService), serviceLifetime));
 
             return this;
         }

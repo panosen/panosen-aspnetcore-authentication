@@ -26,7 +26,7 @@ namespace Panosen.AspNetCore.Authentication.Header
         public HeaderAuthenticationBuilder AddHeaderAuthenticationService<THeaderAuthenticationService>(ServiceLifetime serviceLifetime)
             where THeaderAuthenticationService : class, IHeaderAuthenticationService
         {
-            services.Add(ServiceDescriptor.Describe(typeof(THeaderAuthenticationService), typeof(THeaderAuthenticationService), serviceLifetime));
+            services.Add(ServiceDescriptor.Describe(typeof(IHeaderAuthenticationService), typeof(THeaderAuthenticationService), serviceLifetime));
 
             return this;
         }
