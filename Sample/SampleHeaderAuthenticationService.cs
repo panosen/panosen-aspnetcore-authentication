@@ -17,12 +17,15 @@ namespace Sample
         /// </summary>
         public Task<HeaderAuthenticateResult> AuthenticateAsync(string headerValue)
         {
-            var result = new HeaderAuthenticateResult();
+            var success = !string.IsNullOrEmpty(headerValue);
+            if (!success)
+            {
+                return Task.FromResult(HeaderAuthenticateResult.Fail);
+            }
 
-            result.Success = !string.IsNullOrEmpty(headerValue);
-            result.Claims = new List<Claim> { new Claim(ClaimTypes.Name, headerValue) };
+            var claims = new List<Claim> { new Claim(ClaimTypes.Name, headerValue) };
 
-            return Task.FromResult(result);
+            return Task.FromResult(HeaderAuthenticateResult.Ok(claims));
         }
     }
 }

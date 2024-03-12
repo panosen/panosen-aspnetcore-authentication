@@ -15,18 +15,16 @@ namespace Sample
     {
         public Task<BasicAuthenticateResult> ValidateAsync(string userName, string password)
         {
-            var result = new BasicAuthenticateResult();
-
-            result.Success = "harriszhang".Equals(userName, StringComparison.CurrentCultureIgnoreCase) &&
+            var success = "harriszhang".Equals(userName, StringComparison.CurrentCultureIgnoreCase) &&
               "abc123".Equals(password, StringComparison.CurrentCultureIgnoreCase);
-            if (!result.Success)
+            if (!success)
             {
-                return Task.FromResult(result);
+                return Task.FromResult(BasicAuthenticateResult.Fail);
             }
 
-            result.Claims = new List<Claim> { new Claim(ClaimTypes.Name, userName) };
+            var claims = new List<Claim> { new Claim(ClaimTypes.Name, userName) };
 
-            return Task.FromResult(result);
+            return Task.FromResult(BasicAuthenticateResult.Ok(claims));
         }
     }
 }
