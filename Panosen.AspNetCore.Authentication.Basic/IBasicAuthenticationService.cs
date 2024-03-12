@@ -14,6 +14,6 @@ namespace Panosen.AspNetCore.Authentication.Basic
         /// <summary>
         /// 验证用户名密码
         /// </summary>
-        Task<bool> ValidateAsync(string userName, string password);
+        Task<BasicAuthenticateResult> ValidateAsync(string userName, string password);
     }
 }

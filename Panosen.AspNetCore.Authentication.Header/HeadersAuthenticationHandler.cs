@@ -43,16 +43,20 @@ namespace Panosen.AspNetCore.Authentication.Header
                 return AuthenticateResult.Fail($"{Options.HeaderKey} is null or empty.");
             }
 
-            var valid = await authenticationService.AuthenticateAsync(headerValue);
-            if (!valid)
+            var headerAuthenticateResult = await authenticationService.AuthenticateAsync(headerValue);
+            if (headerAuthenticateResult == null)
+            {
+                Logger.LogWarning("AuthenticateAsync failed.");
+                return AuthenticateResult.Fail($"AuthenticateAsync failed.");
+            }
+
+            if (!headerAuthenticateResult.Success)
             {
                 Logger.LogWarning("token valid failed.");
                 return AuthenticateResult.Fail($"{Options.HeaderKey} is invalid.");
             }
 
-            var claims = new List<Claim> { new Claim(ClaimTypes.Name, headerValue) };
-
-            var principal = new ClaimsPrincipal(new ClaimsIdentity(claims, HeaderAuthenticationDefaults.AuthenticationScheme));
+            var principal = new ClaimsPrincipal(new ClaimsIdentity(headerAuthenticateResult.Claims, HeaderAuthenticationDefaults.AuthenticationScheme));
 
             return AuthenticateResult.Success(new AuthenticationTicket(principal, HeaderAuthenticationDefaults.AuthenticationScheme));
         }

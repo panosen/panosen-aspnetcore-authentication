@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,12 +13,20 @@ namespace Sample
     /// </summary>
     public class SampleIBasicAuthenticationService : IBasicAuthenticationService
     {
-        public Task<bool> ValidateAsync(string userName, string password)
+        public Task<BasicAuthenticateResult> ValidateAsync(string userName, string password)
         {
-            var valid = "harriszhang".Equals(userName, StringComparison.CurrentCultureIgnoreCase) &&
-              "abc123".Equals(password, StringComparison.CurrentCultureIgnoreCase);
+            var result = new BasicAuthenticateResult();
 
-            return Task.FromResult(valid);
+            result.Success = "harriszhang".Equals(userName, StringComparison.CurrentCultureIgnoreCase) &&
+              "abc123".Equals(password, StringComparison.CurrentCultureIgnoreCase);
+            if (!result.Success)
+            {
+                return Task.FromResult(result);
+            }
+
+            result.Claims = new List<Claim> { new Claim(ClaimTypes.Name, userName) };
+
+            return Task.FromResult(result);
         }
     }
 }

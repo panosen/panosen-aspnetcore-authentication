@@ -77,16 +77,20 @@ namespace Panosen.AspNetCore.Authentication.Basic
                     return AuthenticateResult.Fail("token format error.");
                 }
 
-                var valid = await basicAuthenticationService.ValidateAsync(array[0], array[1]);
-                if (!valid)
+                var basicAuthenticateResult = await basicAuthenticationService.ValidateAsync(array[0], array[1]);
+                if (basicAuthenticateResult == null)
+                {
+                    Logger.LogWarning("AuthenticateAsync failed.");
+                    return AuthenticateResult.Fail($"AuthenticateAsync failed.");
+                }
+
+                if (!basicAuthenticateResult.Success)
                 {
                     Logger.LogWarning("token valid failed.");
                     return AuthenticateResult.Fail("token valida failed.");
                 }
 
-                var claims = new List<Claim> { new Claim(ClaimTypes.Name, array[0]) };
-
-                var principal = new ClaimsPrincipal(new ClaimsIdentity(claims, BasicAuthenticationDefaults.AuthenticationScheme));
+                var principal = new ClaimsPrincipal(new ClaimsIdentity(basicAuthenticateResult.Claims, BasicAuthenticationDefaults.AuthenticationScheme));
 
                 return AuthenticateResult.Success(new AuthenticationTicket(principal, BasicAuthenticationDefaults.AuthenticationScheme));
             }
