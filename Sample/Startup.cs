@@ -28,14 +28,14 @@ namespace Sample
         {
             ////添加基础身份认证
             services.AddAuthentication(BasicAuthenticationDefaults.AuthenticationScheme)
-                .AddPanosenBasicAuthentication()
-                .AddBasicAuthenticationService<SampleIBasicAuthenticationService>(ServiceLifetime.Singleton);
+                .AddPanosenBasicAuthentication<SampleIBasicAuthenticationService>(ServiceLifetime.Singleton);
 
             //添加Header身份认证
-            services.AddAuthentication(HeaderAuthenticationDefaults.AuthenticationScheme).AddPanosenHeaderAuthentication(options =>
+            services.AddAuthentication(HeaderAuthenticationDefaults.AuthenticationScheme)
+                .AddPanosenHeaderAuthentication<SampleHeaderAuthenticationService>(options =>
             {
                 options.HeaderKey = "NUGET-API-KEY";
-            }).AddHeaderAuthenticationService<SampleHeaderAuthenticationService>(ServiceLifetime.Singleton);
+            }, ServiceLifetime.Singleton);
 
             services.AddControllers();
         }

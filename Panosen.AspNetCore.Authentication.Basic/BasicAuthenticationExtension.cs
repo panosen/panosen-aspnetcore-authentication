@@ -17,37 +17,53 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <summary>
         /// 添加基础身份认证
         /// </summary>
-        public static BasicAuthenticationBuilder AddPanosenBasicAuthentication(this AuthenticationBuilder builder)
-            => builder.AddPanosenBasicAuthentication(BasicAuthenticationDefaults.AuthenticationScheme);
+        public static AuthenticationBuilder AddPanosenBasicAuthentication<TBasicAuthenticationService>(this AuthenticationBuilder builder, ServiceLifetime serviceLifetime)
+            where TBasicAuthenticationService : class, IBasicAuthenticationService
+        {
+            return builder.AddPanosenBasicAuthentication<TBasicAuthenticationService>(BasicAuthenticationDefaults.AuthenticationScheme, serviceLifetime);
+        }
+
 
         /// <summary>
         /// 添加基础身份认证
         /// </summary>
-        public static BasicAuthenticationBuilder AddPanosenBasicAuthentication(this AuthenticationBuilder builder, string authenticationScheme)
-            => builder.AddPanosenBasicAuthentication(authenticationScheme, configureOptions: null);
+        public static AuthenticationBuilder AddPanosenBasicAuthentication<TBasicAuthenticationService>(this AuthenticationBuilder builder, string authenticationScheme, ServiceLifetime serviceLifetime)
+            where TBasicAuthenticationService : class, IBasicAuthenticationService
+        {
+            return builder.AddPanosenBasicAuthentication<TBasicAuthenticationService>(authenticationScheme, configureOptions: null, serviceLifetime);
+        }
 
         /// <summary>
         /// 添加基础身份认证
         /// </summary>
-        public static BasicAuthenticationBuilder AddPanosenBasicAuthentication(this AuthenticationBuilder builder, Action<BasicAuthenticationOptions> configureOptions)
-            => builder.AddPanosenBasicAuthentication(BasicAuthenticationDefaults.AuthenticationScheme, configureOptions);
+        public static AuthenticationBuilder AddPanosenBasicAuthentication<TBasicAuthenticationService>(this AuthenticationBuilder builder, Action<BasicAuthenticationOptions> configureOptions, ServiceLifetime serviceLifetime)
+            where TBasicAuthenticationService : class, IBasicAuthenticationService
+        {
+            return builder.AddPanosenBasicAuthentication<TBasicAuthenticationService>(BasicAuthenticationDefaults.AuthenticationScheme, configureOptions, serviceLifetime);
+        }
 
         /// <summary>
         /// 添加基础身份认证
         /// </summary>
-        public static BasicAuthenticationBuilder AddPanosenBasicAuthentication(this AuthenticationBuilder builder, string authenticationScheme, Action<BasicAuthenticationOptions> configureOptions)
-            => builder.AddPanosenBasicAuthentication(authenticationScheme, displayName: BasicAuthenticationDefaults.DisplayName, configureOptions: configureOptions);
+        public static AuthenticationBuilder AddPanosenBasicAuthentication<TBasicAuthenticationService>(this AuthenticationBuilder builder, string authenticationScheme, Action<BasicAuthenticationOptions> configureOptions, ServiceLifetime serviceLifetime)
+            where TBasicAuthenticationService : class, IBasicAuthenticationService
+        {
+            return builder.AddPanosenBasicAuthentication<TBasicAuthenticationService>(authenticationScheme, displayName: BasicAuthenticationDefaults.DisplayName, configureOptions: configureOptions, serviceLifetime);
+        }
 
         /// <summary>
         /// 添加基础身份认证
         /// </summary>
-        public static BasicAuthenticationBuilder AddPanosenBasicAuthentication(this AuthenticationBuilder builder, string authenticationScheme, string displayName, Action<BasicAuthenticationOptions> configureOptions)
+        public static AuthenticationBuilder AddPanosenBasicAuthentication<TBasicAuthenticationService>(this AuthenticationBuilder builder, string authenticationScheme, string displayName, Action<BasicAuthenticationOptions> configureOptions, ServiceLifetime serviceLifetime)
+            where TBasicAuthenticationService : class, IBasicAuthenticationService
         {
             builder.Services.AddOptions<BasicAuthenticationOptions>(authenticationScheme);
 
             builder.AddScheme<BasicAuthenticationOptions, BasicAuthenticationHandler>(authenticationScheme, displayName, configureOptions);
 
-            return new BasicAuthenticationBuilder(builder.Services);
+            builder.Services.Add(ServiceDescriptor.Describe(typeof(IBasicAuthenticationService), typeof(TBasicAuthenticationService), serviceLifetime));
+
+            return builder;
         }
     }
 }
